@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Bookings</h2>
+<table>
+  <tr><th>ID</th><th>Passenger</th><th>Flight</th><th>Route</th><th>Seat</th><th>Status</th><th>Action</th></tr>
+  {% for b in bookings %}
+  <tr>
+    <td>{{ b.id }}</td>
+    <td>{{ b.first_name }} {{ b.last_name }}</td>
+    <td>{{ b.flight_no }}</td>
+    <td>{{ b.origin_code }} → {{ b.dest_code }}</td>
+    <td>{{ b.seat_no or '-' }}</td>
+    <td>{{ b.status }}</td>
+    <td>
+      {% if b.status != 'CANCELLED' %}
+      <form action="/bookings/{{ b.id }}/cancel" method="post">
+        <button type="submit">Cancel</button>
+      </form>
+      {% endif %}
+    </td>
+  </tr>
+  {% else %}
+  <tr><td colspan="7">No bookings found.</td></tr>
+  {% endfor %}
+</table>
+{% endblock %}

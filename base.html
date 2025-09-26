@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airline Management System</title>
+    <style>
+        :root {
+            --accent: #0b62a4;
+            --muted: #6b7280;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7fafc;
+            color: #111;
+        }
+
+        header {
+            background: var(--accent);
+            padding: 1rem 0;
+        }
+
+        nav {
+            max-width: 980px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+            margin: 0 0.5rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #ffd700;
+        }
+
+        main {
+            max-width: 980px;
+            margin: 2rem auto;
+            padding: 1rem;
+        }
+
+        footer {
+            background: #e6edf3;
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: var(--muted);
+        }
+
+        h1, h2, h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        /* Button styling */
+        .button {
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            background: var(--accent);
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .button:hover {
+            background: #094a82;
+        }
+
+        /* Table styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 0.6rem;
+            text-align: left;
+        }
+
+        th {
+            background: var(--accent);
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <header>
+        <nav>
+            <a href="{{ url_for('home') }}">Home</a> |
+            <a href="{{ url_for('flights') }}">Flights</a> |
+            <a href="{{ url_for('bookings') }}">Bookings</a> |
+            <a href="{{ url_for('passengers') }}">Passengers</a> |
+            <a href="{{ url_for('airports') }}">Airports</a> |
+            <a href="{{ url_for('services') }}">Services</a>
+
+            {% if session.get('role') == 'ADMIN' %}
+                | <a href="{{ url_for('add_flight') }}">Add Flight</a>
+            {% endif %}
+
+            {% if session.get('user_id') %}
+                | <a href="{{ url_for('dashboard') }}">Dashboard</a>
+                | <a href="{{ url_for('logout') }}">Logout</a>
+            {% else %}
+                | <a href="{{ url_for('login') }}">Login</a>
+                | <a href="{{ url_for('register') }}">Register</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 Airline Management System</p>
+    </footer>
+</body>
+</html>

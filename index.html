@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Search Flights</h2>
+<form action="/search" method="get">
+  <label>From:
+    <select name="origin">
+      <option value="">Any</option>
+      {% for a in airports %}
+      <option value="{{ a.id }}">{{ a.code }} — {{ a.city }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <label>To:
+    <select name="destination">
+      <option value="">Any</option>
+      {% for a in airports %}
+      <option value="{{ a.id }}">{{ a.code }} — {{ a.city }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <label>Date:
+    <input type="date" name="date">
+  </label>
+  <button type="submit">Search</button>
+</form>
+
+<h2>Upcoming Flights</h2>
+<table>
+  <tr><th>Flight</th><th>Route</th><th>Departure</th><th>Arrival</th><th>Price</th><th></th></tr>
+  {% for f in flights %}
+  <tr>
+    <td>{{ f.flight_no }}</td>
+    <td>{{ f.origin }} → {{ f.destination }}</td>
+    <td>{{ f.departure_time }}</td>
+    <td>{{ f.arrival_time }}</td>
+    <td>₹{{ f.price }}</td>
+    <td><a href="/flights/{{ f.id }}">View</a></td>
+  </tr>
+  {% else %}
+  <tr><td colspan="6">No flights available.</td></tr>
+  {% endfor %}
+</table>
+{% endblock %}

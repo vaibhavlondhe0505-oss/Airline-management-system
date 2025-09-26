@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Passengers</h2>
+<table>
+  <tr><th>ID</th><th>Name</th><th>Email</th><th>Phone</th></tr>
+  {% for p in passengers %}
+  <tr>
+    <td>{{ p.id }}</td>
+    <td>{{ p.first_name }} {{ p.last_name }}</td>
+    <td>{{ p.email }}</td>
+    <td>{{ p.phone }}</td>
+  </tr>
+  {% else %}
+  <tr><td colspan="4">No passengers yet.</td></tr>
+  {% endfor %}
+</table>
+{% endblock %}

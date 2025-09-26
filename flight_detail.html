@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Flight {{ flight.flight_no }}</h2>
+<p><strong>Route:</strong> {{ flight.origin_code }} → {{ flight.dest_code }}</p>
+<p><strong>Departure:</strong> {{ flight.departure_time }}</p>
+<p><strong>Arrival:</strong> {{ flight.arrival_time }}</p>
+<p><strong>Seats Left:</strong> {{ seats_left }}</p>
+
+<h3>Book a Seat</h3>
+<form method="post" action="/book">
+  <input type="hidden" name="flight_id" value="{{ flight.id }}">
+  <label>First Name: <input type="text" name="first_name" required></label>
+  <label>Last Name: <input type="text" name="last_name" required></label>
+  <label>Email: <input type="email" name="email" required></label>
+  <label>Phone: <input type="text" name="phone" required></label>
+  <label>Seat No: <input type="text" name="seat_no"></label>
+  <button type="submit">Confirm Booking</button>
+</form>
+
+<h3>Bookings</h3>
+<table>
+  <tr><th>Passenger</th><th>Email</th><th>Seat</th><th>Status</th></tr>
+  {% for b in bookings %}
+  <tr>
+    <td>{{ b.first_name }} {{ b.last_name }}</td>
+    <td>{{ b.email }}</td>
+    <td>{{ b.seat_no or '-' }}</td>
+    <td>{{ b.status }}</td>
+  </tr>
+  {% else %}
+  <tr><td colspan="4">No bookings yet.</td></tr>
+  {% endfor %}
+</table>
+{% endblock %}

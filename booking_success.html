@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Booking Confirmed 🎉</h2>
+<p>Booking ID: {{ booking.id }}</p>
+<p>Passenger: {{ passenger.first_name }} {{ passenger.last_name }}</p>
+<p>Flight: {{ booking.flight_no }} ({{ booking.origin_code }} → {{ booking.dest_code }})</p>
+<p>Departure: {{ booking.departure_time }}</p>
+<p>Arrival: {{ booking.arrival_time }}</p>
+<p>Seat: {{ booking.seat_no or 'Assigned later' }}</p>
+<a href="/bookings">View All Bookings</a>
+{% endblock %}

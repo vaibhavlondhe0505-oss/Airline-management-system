@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Admin Dashboard</h2>
+
+<p>Welcome, {{ user.username }} (Role: {{ user.role }})</p>
+
+<div class="dashboard-links">
+  <ul>
+    <li><a href="/flights">✈ Manage Flights</a></li>
+    <li><a href="/bookings">📑 Manage Bookings</a></li>
+    <li><a href="/passengers">👤 Manage Passengers</a></li>
+    <li><a href="/airports">🌍 Manage Airports</a></li>
+  </ul>
+</div>
+
+<form method="post" action="/logout">
+  <button type="submit">Logout</button>
+</form>
+{% endblock %}

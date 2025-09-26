@@ -1,0 +1,116 @@
+Airline Management System – Workflow
+1. Authentication
+
+User (Admin/Staff) Registration
+
+Register → Store username, password (hashed), role (ADMIN / STAFF) in users.
+
+Login
+
+User enters username + password → verified from users.
+
+If correct → Session is created.
+
+Logout
+
+Clears session → user redirected to login page.
+
+2. Admin Dashboard
+
+After login → user lands on Dashboard (/dashboard).
+
+Admin/Staff can navigate to:
+
+Flights
+
+Airports
+
+Passengers
+
+Bookings
+
+3. Airports
+
+Add Airport
+
+Admin enters details → stored in airports.
+
+View Airports
+
+All airports listed in airports.html.
+
+4. Flights
+
+Create Flights (seeded or via SQL for now)
+
+Each flight links to airports (origin, destination).
+
+View Flights
+
+List shown in flights.html.
+
+Flight Details
+
+Shows route, timings, seats left.
+
+Displays passenger bookings linked to that flight.
+
+5. Bookings
+
+Book a Flight
+
+Passenger details entered on flight_detail.html.
+
+Inserts passenger → then booking (bookings table).
+
+Redirects to booking_success.html.
+
+Booking Confirmation
+
+Shows Booking ID, Passenger, Flight, Seat, Status.
+
+Manage Bookings
+
+All bookings listed on bookings.html.
+
+Option to Cancel (updates status → CANCELLED).
+
+6. Passengers
+
+Passenger Directory
+
+Lists all passengers from passengers.
+
+Admin/staff can see who booked flights.
+
+7. Data Flow
+
+Airports created → stored in DB.
+
+Flights scheduled → linked with airports.
+
+Passenger books → entry in passengers + bookings.
+
+Bookings managed → cancel / confirm.
+
+Admin controls everything → via dashboard.
+
+Workflow Diagram (Text Form)
+[Login/Register] → [Dashboard]
+                     │
+     ┌───────────────┼─────────────────┐
+     ↓               ↓                 ↓
+ [Airports]     [Flights]          [Passengers]
+     │             │                      │
+     │             ↓                      │
+     │        [Flight Detail]             │
+     │             ↓                      │
+     │        [Book Flight]               │
+     │             ↓                      │
+     │        [Bookings] ←───────────────┘
+     │             │
+     └──────→ [Cancel Booking]
+
+
+✅ So the workflow is:
+Airports → Flights → Booking (Passenger + Seat) → Manage Bookings → Admin Dashboard oversees all.
